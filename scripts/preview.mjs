@@ -63,6 +63,8 @@ async function renderPage() {
       border-radius: 6px;
     }
     @media (max-width: 767px) { .markdown-body { padding: 15px; margin: 0; border-radius: 0; } }
+    .markdown-body li:has(> input[type="checkbox"]) { list-style-type: none; }
+    .markdown-body li > input[type="checkbox"] { margin: 0 0.35em 0.25em -1.4em; vertical-align: middle; }
   </style>
 </head>
 <body>
