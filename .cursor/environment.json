@@ -1,0 +1,11 @@
+{
+  "name": "ferrisljh93 profile README",
+  "install": "npm ci --no-audit --no-fund",
+  "terminals": [
+    {
+      "name": "readme-preview",
+      "command": "npm run preview"
+    }
+  ],
+  "ports": [3000]
+}
