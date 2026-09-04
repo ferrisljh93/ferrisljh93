@@ -3,6 +3,18 @@ import { NoteForm } from "@/components/note-form";
 
 export const dynamic = "force-dynamic";
 
+// Deterministic across server (UTC) and client so the list does not hit a
+// hydration mismatch on locale/timezone-dependent date formatting.
+const timestampFormatter = new Intl.DateTimeFormat("en-US", {
+  dateStyle: "medium",
+  timeStyle: "short",
+  timeZone: "UTC",
+});
+
+function formatTimestamp(iso: string): string {
+  return `${timestampFormatter.format(new Date(iso))} UTC`;
+}
+
 export default async function Home() {
   const notes = await getNotes();
 
@@ -48,8 +60,9 @@ export default async function Home() {
                   <time
                     className="shrink-0 text-xs text-black/40 dark:text-white/40"
                     dateTime={note.createdAt}
+                    suppressHydrationWarning
                   >
-                    {new Date(note.createdAt).toLocaleString()}
+                    {formatTimestamp(note.createdAt)}
                   </time>
                 </div>
                 {note.body && (
